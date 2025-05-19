@@ -12,14 +12,16 @@ Este es un proyecto de e-commerce desarrollado con **React**, simula la tienda d
 
 ## 📂 Estructura del proyecto
 
+```plaintext
 src/
 │
-├── assets/ # Imágenes y recursos estáticos
-├── components/ # Componentes reutilizables (Header, Footer, Cart, etc.)
-├── components/style # Hojas de estilos de los componentes
-├── context/ # CartContext con lógica de carrito
-├── layout/ # Vistas principales (Inicio, Galería, Contacto, Login, etc.)
-└── App.jsx # Componente raíz
+├── assets/               # Imágenes y recursos estáticos
+├── components/           # Componentes reutilizables (Header, Footer, Cart, etc.)
+│   └── style/            # Hojas de estilos de los componentes
+├── context/              # CartContext con lógica de carrito
+├── layout/               # Vistas principales (Inicio, Galería, Contacto, Login, etc.)
+└── App.jsx               # Componente raíz
+```
 
 ## 🛒 Funcionalidades
 
