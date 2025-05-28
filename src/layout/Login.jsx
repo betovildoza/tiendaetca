@@ -1,38 +1,47 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useContext } from 'react';
+
+import { useAuth } from '../context/AuthContext';
 import './layoutMain.css'
 
 const Login = () => {
-  const navigate = useNavigate();
-
-  const handleBack = () => {
-    navigate(-1);
-  };
+  const { errors, email, setEmail, password, setPassword, handleSubmit } = useAuth();
 
   return (
-    <div className="login-container">
-      <h2>LOGIN</h2>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="formBasicEmail" className="form-label">
+          Email
+        </label>
+        <input
+          id="formBasicEmail"
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={`form-input ${errors.email ? 'form-input-error' : ''}`}
+        />
+        {errors.email && <div className="form-error">{errors.email}</div>}
+      </div>
 
-      <form className="login-form">
-        <div className="form-group">
-          <label htmlFor="usuario">Usuario</label>
-          <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" />
-        </div>
+      <div className="form-group">
+        <label htmlFor="formBasicPassword" className="form-label">
+          Contraseña
+        </label>
+        <input
+          id="formBasicPassword"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={`form-input ${errors.password ? 'form-input-error' : ''}`}
+        />
+        {errors.password && <div className="form-error">{errors.password}</div>}
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Contraseña</label>
-          <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" />
-        </div>
-
-        <button type="submit" disabled className="btn-disabled">
-          Iniciar Sesión
-        </button>
-      </form>
-
-      <button onClick={handleBack} className="btn-inicio">
-        VOLVER
+      <button type="submit" className="btn-submit">
+        Enviar
       </button>
-    </div>
+    </form>
   );
 };
 

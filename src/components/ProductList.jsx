@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Product from './Product'
 import './style/Product.css';
+import { CartContext } from '../context/CartContext';
 
 
-const ProductList = ({products, addToCart }) => {
-  
+const ProductList = () => {
+
+  const {productos} = useContext(CartContext)
 
   return (
     <>
       <div className='galeria'>
-        {products.map(product => (
-          <Product key={product.id} product={product} addToCart={addToCart} />
+        {productos.map(product => (
+          <Product key={product.id} product={product} />
         ))}
       </div>
     </>

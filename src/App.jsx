@@ -11,14 +11,15 @@ import Login from "./layout/Login";
 import Admin from "./layout/Admin"
 import RutaProtegida from "./auth/RutaProtegida";
 import { CartContext } from "./context/CartContext";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
   
-  const {isAuthenticated} = useContext(CartContext)
+  const {isAuthenticated} = useAuth()
 
   return (
     <>
-      <Router>
+      
         <Routes>
           <Route path="/" element={ <Home/>}/>
 
@@ -36,7 +37,7 @@ function App() {
 
           <Route path="*" element={<NotFound />}/>
         </Routes>
-      </Router>
+      
     </>
   );
 }

@@ -8,7 +8,7 @@ import './layoutMain.css'
 import { CartContext } from '../context/CartContext'
 
 const GaleriaProductos = () => {
-  const { carga, productos, isCartOpen, setCartOpen, handleAddToCart } = useContext(CartContext)
+  const { carga, productos, isCartOpen, setCartOpen } = useContext(CartContext)
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('todas')
 
   const categorias = [...new Set(productos.map(p => p.categoria))];
@@ -41,7 +41,7 @@ const GaleriaProductos = () => {
             </select>
           </div>
 
-          <ProductList products={productosFiltrados} addToCart={handleAddToCart} />
+          <ProductList products={productosFiltrados}  />
         </>
       )}
 

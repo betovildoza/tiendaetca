@@ -9,12 +9,12 @@ import loading from '../assets/loading.gif'
 import NotFound from '../components/NotFound'
 import { CartContext } from '../context/CartContext'
 import tresArquerosBochin from '../assets/tresArquerosBochin.jpg'
-import arquera from "../assets/arquero002a.webp"
+//import arquera from "../assets/arquero002a.webp"
 import pines from "../assets/pinesETCA.jpg"
 
 const Home = () => {
 
-  const { carga, error, productos, cart, handleAddToCart, isCartOpen, setCartOpen} = useContext(CartContext)
+  const { carga, error, isCartOpen, setCartOpen} = useContext(CartContext)
 
 
   if (error) {
@@ -32,7 +32,7 @@ const Home = () => {
       
       {
         carga ? <img style={{ display: 'block', margin: '0 auto' }} src={loading} alt='loading' /> :
-          <ProductList cart={cart} products={productos} addToCart={handleAddToCart} />
+          <ProductList />
       }
 
       <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)}/>

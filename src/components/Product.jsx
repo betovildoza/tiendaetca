@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './style/Product.css';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
 
 
-const Product = ({ product, addToCart }) => {
+const Product = ({ product}) => {
+
+  const {handleAddToCart} = useContext(CartContext)
+
   return (
     <section className="product">
       <div className="fondoProducto">
@@ -15,7 +19,7 @@ const Product = ({ product, addToCart }) => {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' }}>
 
-        <button onClick={() => addToCart({ ...product, cantidad: 1 })}>
+        <button onClick={() => handleAddToCart({ ...product, cantidad: 1 })}>
           Agregar
         </button>
         <Link to={`/productos/${product.id}`} style={{ textAlign: 'center', padding: '10px' }}>
