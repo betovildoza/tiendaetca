@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 
 export const CartContext = createContext()
 
@@ -8,7 +9,10 @@ export const CartProvider = ({ children }) => {
     const [productos, setProductos] = useState([]);
     const [error, setError] = useState(false);
     const [carga, setCarga] = useState(true);
-    const [isAuthenticated, setIsAuth] = useState(false)
+    //const [isAuthenticated, setIsAuth] = useState(false)
+    const [busqueda, setBusqueda] = useState("")
+
+    const productosFiltrados = productos.filter((producto) => producto?.nombre.toLowerCase().includes(busqueda.toLowerCase()))
 
 
     const eliminarProducto = (product) => {
@@ -28,8 +32,10 @@ export const CartProvider = ({ children }) => {
                         : item
                 )
             );
+            toast.info(`Cantidad aumentada para "${product.nombre}"`);
         } else {
             setCart([...cart, product]);
+            toast.success(`"${product.nombre}" agregado al carrito`);
         }
     };
 
@@ -76,11 +82,11 @@ export const CartProvider = ({ children }) => {
     }, []);
 
     if (error) return <p>Hubo un error al cargar los productos.</p>;
-    
+
     const cartCount = cart.length
 
     return (
-        <CartContext.Provider value={{ carga, error, productos, cartCount, cart, isCartOpen, eliminarProducto, setCartOpen, borrarProducto, vaciarCarrito, handleAddToCart, isAuthenticated }}>
+        <CartContext.Provider value={{ carga, error, productos, cartCount, cart, isCartOpen, eliminarProducto, setCartOpen, borrarProducto, vaciarCarrito, handleAddToCart, productosFiltrados, busqueda, setBusqueda }}>
             {children}
         </CartContext.Provider>
 

@@ -3,7 +3,6 @@ import Formulario from '../components/Formulario'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import './layoutMain.css'
-import arquera from "../assets/arquero002a.webp"
 import Cart from '../components/Cart'
 import { CartContext } from '../context/CartContext'
 
@@ -21,7 +20,6 @@ const Contacto = () => {
 
         <Formulario />
 
-        <img className='fotoContacto' src={arquera} alt="imagen de arquero" />
       </div>
 
       <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)}/>

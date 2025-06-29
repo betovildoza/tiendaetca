@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+//import React, { useState, useContext } from 'react';
 
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom'
 import './layoutMain.css'
 
 const Login = () => {
@@ -41,6 +42,9 @@ const Login = () => {
       <button type="submit" className="btn-submit">
         Enviar
       </button>
+      <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+        <Link to="/">← Volver al inicio</Link>
+      </p>
     </form>
   );
 };

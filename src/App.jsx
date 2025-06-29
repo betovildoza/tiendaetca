@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+//import React, { useContext } from "react";
 import "./App.css";
 import Home from "./layout/Home";
 import NotFound from "./components/NotFound";
@@ -10,12 +10,13 @@ import DetallesProductos from "./layout/DetallesProductos";
 import Login from "./layout/Login";
 import Admin from "./layout/Admin"
 import RutaProtegida from "./auth/RutaProtegida";
-import { CartContext } from "./context/CartContext";
 import { useAuth } from "./context/AuthContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
-  const {isAuthenticated} = useAuth()
+  const {isAuthenticated, role} = useAuth()
 
   return (
     <>
@@ -31,13 +32,13 @@ function App() {
 
           <Route path="/contacto" element={<Contacto />}/>
 
-          <Route path='/admin' element={<RutaProtegida isAuthenticated={isAuthenticated}> <Admin /> </RutaProtegida>}/>
+          <Route path='/admin' element={<RutaProtegida isAuthenticated={isAuthenticated} requeridRole='admin' role={role}> <Admin /> </RutaProtegida>}/>
 
           <Route path='/login' element={<Login />}/>
 
           <Route path="*" element={<NotFound />}/>
         </Routes>
-      
+      <ToastContainer />
     </>
   );
 }

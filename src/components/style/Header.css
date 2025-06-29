@@ -47,6 +47,11 @@ nav a {
   font-size: 18px;
 }
 
+.link.active {
+  color: #007bff;
+  font-weight: bold;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   nav ul {

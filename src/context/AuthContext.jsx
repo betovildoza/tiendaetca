@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -9,7 +9,25 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuth] = useState(false)
-  
+  const [role, setRole] = useState('')
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuth') === 'true'
+    const userRole = localStorage.getItem('role') || '';
+
+    if (isAuthenticated && userRole === 'admin') {
+      setIsAuth(true)
+      setRole(userRole)
+      navigate('/admin')
+    }
+    else if (isAuthenticated && userRole === 'cliente') {
+      setIsAuth(true)
+      setRole(userRole)
+      navigate('/')
+    }
+  }, [])
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let validationErrors = {};
@@ -33,10 +51,14 @@ export const AuthProvider = ({ children }) => {
         setErrors({ email: 'credenciales invalidas' });
       } else {
         console.log('User role:', foundUser.role);
-        
+        setRole(foundUser.role);
+        setIsAuth(true)
+        localStorage.setItem('isAuth', true);
+        localStorage.setItem('role', foundUser.role);
+
         if (foundUser.role === 'admin') {
-          setIsAuth(true);
-            
+
+
           navigate('/admin');
         } else {
           navigate('/');
@@ -47,10 +69,10 @@ export const AuthProvider = ({ children }) => {
       setErrors({ email: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.' });
     }
   };
- 
+
 
   return (
-    <AuthContext.Provider value={{email, setEmail,password, setPassword, handleSubmit, errors, setErrors, setIsAuth, isAuthenticated}}>
+    <AuthContext.Provider value={{ email, setEmail, password, setPassword, handleSubmit, errors, setErrors, setIsAuth, isAuthenticated, role }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,51 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import FormularioProducto from "../components/FormularioProducto";
 import './layoutMain.css'
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import FormularioEdicion from "../components/FormularioEdicion";
+import { AdminContext } from "../context/AdminContext";
+
 
 const Admin = () => {
-    const [productos, setProductos] = useState([]);
-    const [form, setForm] = useState({ id: null, name: "", price: "" });
-    const [loading, setLoading] = useState(true);
-    const [open, setOpen] = useState(false)
+  const { setIsAuth } = useAuth()
+  const { productos, loading, open, setOpen, openEditor, setOpenEditor, seleccionado, setSeleccionado, agregarProducto, actualizarProducto, eliminarProducto } = useContext(AdminContext)
 
-    useEffect(() => {
-        fetch("https://681cdce3f74de1d219ae0bdb.mockapi.io/tiendatobe/productos")
-            .then((response) => response.json())
-            .then((data) => {
-                setTimeout(() => {
-                    setProductos(data);
-                    setLoading(false);
-                }, 2000);
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-                setError(true);
-                setLoading(false);
-            });
-    }, []);
+  const navigate = useNavigate()
 
-    const agregarProducto = async (producto) =>{
-        try{
-            const respuesta = await fetch('https://681cdce3f74de1d219ae0bdb.mockapi.io/tiendatobe/productos',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(producto)
-        })
-        if(!respuesta.ok){
-            throw new Error('Error al agregar producto')
-        }
-        const data = await respuesta.json()
-        alert('Producto agregado correctamente')
-        }catch(error){
-            console.log(error.message);
-            
-        }
-    }
 
-    return (
-         <div className="layout-container">
+
+
+  return (
+    <div className="layout-container">
       {loading ? (
         <p>Cargando...</p>
       ) : (
@@ -53,7 +25,11 @@ const Admin = () => {
           <nav>
             <ul className="nav">
               <li className="navItem">
-                <button className="navButton">
+                <button className="navButton" onClick={() => {
+                  setIsAuth(false);
+                  navigate('/');
+                  localStorage.removeItem('isAuth');
+                }}>
                   <i className="fa-solid fa-right-from-bracket"></i>
                 </button>
               </li>
@@ -71,8 +47,11 @@ const Admin = () => {
                 <h3 className="product-name">{product.nombre}</h3>
                 <p className="product-price">${product.precio}</p>
                 <div className="product-actions">
-                  <button className="editButton">Editar</button>
-                  <button className="deleteButton">Eliminar</button>
+                  <button className="editButton" onClick={() => {
+                    setOpenEditor(true)
+                    setSeleccionado(product)
+                  }}>Editar</button>
+                  <button className="deleteButton" onClick={() => eliminarProducto(product.id)}>Eliminar</button>
                 </div>
               </li>
             ))}
@@ -80,9 +59,12 @@ const Admin = () => {
         </>
       )}
       <button className="btn-inicio" onClick={() => setOpen(true)}>Abrir panel agregar producto</button>
-      {open && <FormularioProducto onAgregar={agregarProducto} />}
+      {open && <FormularioProducto onAgregar={agregarProducto} onClose={() => setOpen(false)} />}
+
+      {openEditor && (<FormularioEdicion productoSeleccionado={seleccionado} onActualizar={actualizarProducto} onClose={() => setOpenEditor(false)}/>)}
+
     </div>
   );
 };
 
-export default Admin;
+export default Admin;  

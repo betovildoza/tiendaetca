@@ -8,19 +8,7 @@ import './layoutMain.css'
 import { CartContext } from '../context/CartContext'
 
 const GaleriaProductos = () => {
-  const { carga, productos, isCartOpen, setCartOpen } = useContext(CartContext)
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('todas')
-
-  const categorias = [...new Set(productos.map(p => p.categoria))];
-
-  const handleCategoriaChange = (e) => {
-    setCategoriaSeleccionada(e.target.value);
-  };
-
-  // Filtrar productos por categoría
-  const productosFiltrados = categoriaSeleccionada === 'todas'
-    ? productos
-    : productos.filter(p => p.categoria === categoriaSeleccionada);
+  const { carga } = useContext(CartContext)
 
   return (
     <>
@@ -29,23 +17,13 @@ const GaleriaProductos = () => {
       {carga ? (
         <img style={{ display: 'block', margin: '0 auto' }} src={loading} alt='loading' />
       ) : (
-        <>
-          {/* Filtro por categoría */}
-          <div className="filtro-categoria" style={{ textAlign: 'center', margin: '20px' }}>
-            <label htmlFor="categoria">Filtrar por categoría: </label>
-            <select id="categoria" onChange={handleCategoriaChange} value={categoriaSeleccionada}>
-              <option value="todas">Todas</option>
-              {categorias.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
-          </div>
 
-          <ProductList products={productosFiltrados}  />
-        </>
+
+        <ProductList />
+
       )}
 
-      <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
+      <Cart />
       <Footer />
     </>
   );

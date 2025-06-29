@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import './style/Product.css';
 import { CartContext } from '../context/CartContext';
 
-const Cart = ({ isOpen, onClose }) => {
-  const {cart,vaciarCarrito,borrarProducto,handleAddToCart, eliminarProducto} = useContext(CartContext);
+const Cart = () => {
+  const {cart,vaciarCarrito,borrarProducto,handleAddToCart, eliminarProducto, isCartOpen,  setCartOpen} = useContext(CartContext);
 
   const increase = (item) => {
     handleAddToCart({ ...item, cantidad: 1 });
@@ -18,10 +18,10 @@ const Cart = ({ isOpen, onClose }) => {
   const total = cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
   return (
-    <div className={`cart-drawer ${isOpen ? 'open' : ''}`}>
+    <div className={`cart-drawer ${isCartOpen  ? 'open' : ''}`}>
       <div className="cart-header">
         <h2>Carrito de Compras</h2>
-        <button onClick={onClose} className="close-button">✕</button>
+        <button onClick={() => setCartOpen(false)} className="close-button">✕</button>
       </div>
       <div className="cart-content">
         {cart.length === 0 ? (

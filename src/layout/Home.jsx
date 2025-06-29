@@ -14,7 +14,7 @@ import pines from "../assets/pinesETCA.jpg"
 
 const Home = () => {
 
-  const { carga, error, isCartOpen, setCartOpen} = useContext(CartContext)
+  const { carga, error} = useContext(CartContext)
 
 
   if (error) {
@@ -35,7 +35,7 @@ const Home = () => {
           <ProductList />
       }
 
-      <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)}/>
+      <Cart />
 
       <Main2 titular={'Contenido Secundario'}
             texto={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo nostrum libero delectus modi quas iste provident quod minus hic. Quae velit neque libero blanditiis amet quasi reprehenderit facilis, eius eveniet?'}

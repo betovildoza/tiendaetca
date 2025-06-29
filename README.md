@@ -1,43 +1,12 @@
-# 🏹 Tienda de Arquería ETCA
+# React + Vite
 
-Este es un proyecto de e-commerce desarrollado con **React**, simula la tienda de la Escuela de Tiro con Arco. Incluye navegación, carrito de compras, filtrado de productos por categoría y formulario de contacto.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🚀 Tecnologías utilizadas
+Currently, two official plugins are available:
 
-- React
-- React Router DOM
-- Context API (para gestión del carrito)
-- CSS puro
-- Fetch a API externa (MockAPI)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 📂 Estructura del proyecto
+## Expanding the ESLint configuration
 
-```plaintext
-src/
-│
-├── assets/               # Imágenes y recursos estáticos
-├── components/           # Componentes reutilizables (Header, Footer, Cart, etc.)
-│   └── style/            # Hojas de estilos de los componentes
-├── context/              # CartContext con lógica de carrito
-├── layout/               # Vistas principales (Inicio, Galería, Contacto, Login, etc.)
-└── App.jsx               # Componente raíz
-```
-
-## 🛒 Funcionalidades
-
-- 🧭 Navegación entre páginas (Inicio, Productos, Nosotros, Contacto)
-- 🛍️ Carrito con suma, resta, eliminación y vaciado de productos
-- 🔍 Filtro por categoría en la galería de productos
-- 📩 Formulario de contacto funcional (HTML básico)
-- 🔐 Página de Login (simulada)
-
-🙌 Créditos
-Proyecto desarrollado por Alberto Alejandro Vildoza como práctica de React con enfoque en:
-
-Manejo de estados globales con Context
-
-Componentización
-
-Diseño responsive básico
-
-¡Gracias por visitar este proyecto! 🎯
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
