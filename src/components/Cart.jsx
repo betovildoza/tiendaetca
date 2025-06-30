@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import './style/Product.css';
 import { CartContext } from '../context/CartContext';
+import Swal from 'sweetalert2';
+
 
 const Cart = () => {
-  const {cart,vaciarCarrito,borrarProducto,handleAddToCart, eliminarProducto, isCartOpen,  setCartOpen} = useContext(CartContext);
+  const {cart, vaciarCarrito, borrarProducto, handleAddToCart, eliminarProducto, isCartOpen, setCartOpen} = useContext(CartContext);
 
   const increase = (item) => {
     handleAddToCart({ ...item, cantidad: 1 });
@@ -17,8 +19,19 @@ const Cart = () => {
 
   const total = cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
+  
+  const finalizarCompra = () => {
+    vaciarCarrito();
+    Swal.fire({
+      icon: 'success',
+      title: 'Compra finalizada',
+      text: '¡La compra se ha realizado con éxito!',
+      confirmButtonText: 'Aceptar'
+    });
+  };
+
   return (
-    <div className={`cart-drawer ${isCartOpen  ? 'open' : ''}`}>
+    <div className={`cart-drawer ${isCartOpen ? 'open' : ''}`}>
       <div className="cart-header">
         <h2>Carrito de Compras</h2>
         <button onClick={() => setCartOpen(false)} className="close-button">✕</button>
@@ -48,9 +61,15 @@ const Cart = () => {
               Total: ${total.toFixed(2)}
             </div>
 
-            <button onClick={vaciarCarrito} style={{ marginTop: '10px' }}>
-              Vaciar Carrito
-            </button>
+            <div style={{ marginTop: '10px', display: 'flex', gap: '10px' }}>
+              <button onClick={vaciarCarrito}>
+                Vaciar Carrito
+              </button>
+
+              <button onClick={finalizarCompra} style={{ backgroundColor: '#4CAF50', color: 'white' }}>
+                Finalizar Compra
+              </button>
+            </div>
           </>
         )}
       </div>
