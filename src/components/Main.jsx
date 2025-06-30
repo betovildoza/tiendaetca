@@ -1,5 +1,5 @@
 import React from 'react'
-import './style/main.css'
+import './style/Main.css'
 
 const Main = ({titular, texto, boton, imagen}) => {
   return (
