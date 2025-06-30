@@ -8,7 +8,7 @@ const ProductList = () => {
   const { productosFiltrados, busqueda, setBusqueda } = useContext(CartContext)
 
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 6
+  const itemsPerPage = 5
   const indexOfLast = currentPage * itemsPerPage
   const indexOfFirst = indexOfLast - itemsPerPage
   const currentProducts = productosFiltrados.slice(indexOfFirst, indexOfLast)
