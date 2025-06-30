@@ -15,7 +15,7 @@ function FormularioEdicion({ productoSeleccionado, onActualizar, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onActualizar(producto);
-    onClose();  // Cerramos modal al actualizar
+    onClose();  
   };
 
   return (
@@ -90,6 +90,17 @@ function FormularioEdicion({ productoSeleccionado, onActualizar, onClose }) {
               value={producto.categoria || ''}
               onChange={handleChange}
               required
+            />
+          </div>
+
+          <div>
+            <label>Descripción:</label>
+            <textarea
+              name="descripcion"
+              value={producto.descripcion || ''}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Descripción del producto"
             />
           </div>
 
