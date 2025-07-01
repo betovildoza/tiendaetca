@@ -2,30 +2,33 @@ import React, { useContext } from 'react'
 import Formulario from '../components/Formulario'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import './layoutMain.css'
 import Cart from '../components/Cart'
 import { CartContext } from '../context/CartContext'
 
 const Contacto = () => {
   const { isCartOpen, setCartOpen } = useContext(CartContext)
-    
+
   return (
     <>
-      <Header/>
-      <div className="layout-container">
-        <h2 className="layout-title">Contacto</h2>
-        <p className="pContacto">
+      <Header />
+      <div
+        className="container py-5"
+        style={{ backgroundColor: '#ffffff', minHeight: '70vh', color: '#212529' }}
+      >
+        <h2 className="text-center mb-4">Contacto</h2>
+        <p className="text-center mb-5">
           Si tienes alguna consulta, no dudes en escribirnos a través del siguiente formulario.
         </p>
 
-        <Formulario />
-
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <Formulario />
+          </div>
+        </div>
       </div>
 
-      <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)}/>
-        
+      <Cart isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
       <Footer />
-    
     </>
   )
 }
