@@ -44,7 +44,7 @@ const Login = () => {
         </button>
 
         <p className="text-center mt-3">
-          <Link to="/" className="text-primary text-decoration-none fw-medium">← Volver al inicio</Link>
+          <Link to="/" className="text-primary text-decoration-none fw-medium">← Volver al inicio.</Link>
         </p>
       </form>
     </div>
