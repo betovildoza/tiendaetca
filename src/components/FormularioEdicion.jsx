@@ -15,96 +15,117 @@ function FormularioEdicion({ productoSeleccionado, onActualizar, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onActualizar(producto);
-    onClose();  
+    onClose();
   };
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="modal-close" onClick={onClose}>✕</button>
+      <div className="modal-content p-4 rounded" style={{ maxWidth: '600px', backgroundColor: 'white' }}>
+        <button
+          type="button"
+          className="btn-close float-end"
+          aria-label="Close"
+          onClick={onClose}
+        ></button>
 
-        <form className="modal-form-container" onSubmit={handleSubmit}>
-          <h2>Editar Producto</h2>
+        <form onSubmit={handleSubmit} noValidate>
+          <h2 className="mb-4">Editar Producto</h2>
 
-          <div>
-            <label>ID:</label>
+          <div className="mb-3">
+            <label htmlFor="id" className="form-label">ID:</label>
             <input
               type="number"
+              id="id"
               name="id"
               value={producto.id || ''}
               onChange={handleChange}
+              className="form-control"
               readOnly
             />
           </div>
 
-          <div>
-            <label>Nombre:</label>
+          <div className="mb-3">
+            <label htmlFor="nombre" className="form-label">Nombre:</label>
             <input
               type="text"
+              id="nombre"
               name="nombre"
               value={producto.nombre || ''}
               onChange={handleChange}
+              className="form-control"
               required
             />
           </div>
 
-          <div>
-            <label>Precio:</label>
+          <div className="mb-3">
+            <label htmlFor="precio" className="form-label">Precio:</label>
             <input
               type="number"
+              id="precio"
               name="precio"
               value={producto.precio || ''}
               onChange={handleChange}
+              className="form-control"
               required
               min="0"
             />
           </div>
 
-          <div>
-            <label>Stock:</label>
+          <div className="mb-3">
+            <label htmlFor="stock" className="form-label">Stock:</label>
             <input
               type="number"
+              id="stock"
               name="stock"
               value={producto.stock || ''}
               onChange={handleChange}
+              className="form-control"
               required
             />
           </div>
 
-          <div>
-            <label>Imagen URL:</label>
+          <div className="mb-3">
+            <label htmlFor="imagen" className="form-label">Imagen URL:</label>
             <input
               type="text"
+              id="imagen"
               name="imagen"
               value={producto.imagen || ''}
               onChange={handleChange}
+              className="form-control"
               required
             />
           </div>
 
-          <div>
-            <label>Categoria:</label>
+          <div className="mb-3">
+            <label htmlFor="categoria" className="form-label">Categoría:</label>
             <input
               type="text"
+              id="categoria"
               name="categoria"
               value={producto.categoria || ''}
               onChange={handleChange}
+              className="form-control"
               required
             />
           </div>
 
-          <div>
-            <label>Descripción:</label>
+          <div className="mb-4">
+            <label htmlFor="descripcion" className="form-label">Descripción:</label>
             <textarea
+              id="descripcion"
               name="descripcion"
               value={producto.descripcion || ''}
               onChange={handleChange}
               rows={4}
               placeholder="Descripción del producto"
+              className="form-control"
             />
           </div>
 
-          <button type="submit">Actualizar Producto</button>
+          <button type="submit" className="btn btn-success w-100">
+            Actualizar Producto
+          </button>
         </form>
       </div>
     </div>
